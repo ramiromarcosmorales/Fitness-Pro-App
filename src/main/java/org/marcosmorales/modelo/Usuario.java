@@ -19,7 +19,7 @@ public class Usuario {
     }
 
     // Metodo para crear Usuario
-    public static Usuario crearUsuario(String id, String nombre, String apellido, String email, String telefono) {
+    protected static Usuario crearUsuario(String nombre, String apellido, String email, String telefono) {
         return new Usuario(nombre, apellido, email, telefono);
     }
 
