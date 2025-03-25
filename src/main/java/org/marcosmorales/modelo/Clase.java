@@ -9,16 +9,17 @@ public class Clase {
     private LocalDate fecha;
     private LocalTime horario;
 
-    private Clase() {
+    private Clase(LocalDate fecha, LocalTime horario) {
         this.id = UUID.randomUUID().toString();
+        this.fecha = fecha;
+        this.horario = horario;
     }
 
     public static Clase crearClase(LocalDate fecha, LocalTime horario) {
-        Clase clase = new Clase();
-        clase.fecha = fecha;
-        clase.horario = horario;
-        return clase;
+        return new Clase(fecha, horario);
     }
+
+    // Getters
 
     public String getId() {
         return this.id;
@@ -31,6 +32,8 @@ public class Clase {
     public LocalTime getHorario() {
         return this.horario;
     }
+
+    // Setters
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;

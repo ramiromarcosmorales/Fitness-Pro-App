@@ -2,7 +2,7 @@ package org.marcosmorales.modelo;
 
 import java.time.LocalDate;
 
-public class Maquina {
+public class Maquina implements Registrable {
     private String tipo;
     private LocalDate fechaAlta;
     private LocalDate ultMantenimiento;
@@ -20,11 +20,11 @@ public class Maquina {
     }
 
     protected void crearMantenimiento(LocalDate fecha) {
+        setProxMantenimiento(fecha);
         System.out.println("El mantenimiento fue creado para el " + fecha);
     }
 
     // Metodos getters
-
     public String getTipo() {
         return tipo;
     }
@@ -42,7 +42,6 @@ public class Maquina {
     }
 
     // Metodos setters
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -57,5 +56,20 @@ public class Maquina {
 
     public void setProxMantenimiento(LocalDate proxMantenimiento) {
         this.proxMantenimiento = proxMantenimiento;
+    }
+
+    @Override
+    public void registrar() {
+        System.out.println("Maquina registrada: " + getTipo());
+    }
+
+    @Override
+    public String toString() {
+        return "maquina{" +
+                "tipo='" + tipo + '\'' +
+                ", fechaAlta=" + fechaAlta +
+                ", ultMantenimiento=" + ultMantenimiento +
+                ", proxMantenimiento=" + proxMantenimiento +
+                '}';
     }
 }

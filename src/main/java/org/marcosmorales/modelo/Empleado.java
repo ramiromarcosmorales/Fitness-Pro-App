@@ -1,10 +1,26 @@
 package org.marcosmorales.modelo;
 
-public class Empleado extends Usuario {
+public class Empleado extends Usuario implements Registrable {
     private String sector;
 
+    // Constructor sin parámetros
+    public Empleado() {
+        super();
+        this.sector = null;
+    }
+
+    // Constructor con parámetros
     private Empleado(String nombre, String apellido, String email, String telefono, String sector) {
         super(nombre, apellido, email, telefono);
+        this.sector = sector;
+    }
+
+    // Getter y Setter
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
         this.sector = sector;
     }
 
@@ -13,13 +29,6 @@ public class Empleado extends Usuario {
         return new Empleado(nombre, apellido, email, telefono, sector);
     }
 
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
 
     public void registrarMaquina() {
         System.out.println("Maquina registrada correctamente!");
@@ -31,6 +40,11 @@ public class Empleado extends Usuario {
 
     public void gestionarSocios() {
         System.out.println("Gestion de socios");
+    }
+
+    @Override
+    public void registrar() {
+        System.out.println("Empleado registrado: " + getNombre() + " " + getApellido());
     }
 
     @Override

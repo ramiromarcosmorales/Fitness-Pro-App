@@ -9,6 +9,10 @@ public abstract class Usuario {
     private String email;
     private String telefono;
 
+    protected Usuario() {
+        this("", "", "", "");
+    }
+
     // Constructor Protected (Solo las clases hijas pueden acceder al Constructor)
     protected Usuario(String nombre, String apellido, String email, String telefono) {
         this.id = UUID.randomUUID().toString();

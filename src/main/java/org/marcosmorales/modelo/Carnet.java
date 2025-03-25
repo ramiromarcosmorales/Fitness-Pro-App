@@ -22,6 +22,24 @@ public class Carnet {
         return fechaVencimiento.isAfter(LocalDate.now());
     }
 
+    // Getters
+    public LocalDate getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public LocalDate getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    // Setters
+    public void setFechaAlta(LocalDate fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
     @Override
     public String toString() {
         return "Carnet{" +
