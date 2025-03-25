@@ -2,7 +2,7 @@ package org.marcosmorales.modelo;
 
 import java.util.UUID;
 
-public class Usuario {
+public abstract class Usuario {
     private String id;
     private String nombre;
     private String apellido;
@@ -16,11 +16,6 @@ public class Usuario {
         this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
-    }
-
-    // Metodo para crear Usuario
-    protected static Usuario crearUsuario(String nombre, String apellido, String email, String telefono) {
-        return new Usuario(nombre, apellido, email, telefono);
     }
 
     // Getters
@@ -58,5 +53,15 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "user{" +
+                "id='" + id + '\'' +
+                ", nombre=" + nombre +
+                ", apellido=" + apellido +
+                ", email=" + email +
+                ", telefono=" + telefono;
     }
 }
