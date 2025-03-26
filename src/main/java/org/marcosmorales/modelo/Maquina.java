@@ -8,15 +8,15 @@ public class Maquina implements Registrable {
     private LocalDate ultMantenimiento;
     private LocalDate proxMantenimiento;
 
-    private Maquina (String tipo, LocalDate ultMantenimiento, LocalDate proxMantenimiento) {
+    private Maquina (String tipo, LocalDate ultMantenimiento) {
         this.tipo = tipo;
         this.fechaAlta = LocalDate.now();
         this.ultMantenimiento = ultMantenimiento;
-        this.proxMantenimiento = proxMantenimiento;
+        this.proxMantenimiento = ultMantenimiento.plusMonths(6);
     }
 
-    protected static Maquina crearMaquina(String tipo, LocalDate ultMantenimiento, LocalDate proxMantenimiento) {
-        return new Maquina(tipo, ultMantenimiento, proxMantenimiento);
+    public static Maquina crearMaquina(String tipo, LocalDate ultMantenimiento) {
+        return new Maquina(tipo, ultMantenimiento);
     }
 
     protected void crearMantenimiento(LocalDate fecha) {

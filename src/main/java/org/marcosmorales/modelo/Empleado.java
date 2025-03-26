@@ -1,7 +1,13 @@
 package org.marcosmorales.modelo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Scanner;
+
 public class Empleado extends Usuario implements Registrable {
     private String sector;
+
+    Scanner sc = new Scanner(System.in);
 
     // Constructor sin parámetros
     public Empleado() {
@@ -30,16 +36,40 @@ public class Empleado extends Usuario implements Registrable {
     }
 
 
-    public void registrarMaquina() {
-        System.out.println("Maquina registrada correctamente!");
+    // Deberia crear una clase Gimnasio que almacene todos las maquinas.
+    public Maquina registrarMaquina(String tipo, LocalDate ultMantenimiento) {
+        return Maquina.crearMaquina(tipo, ultMantenimiento);
     }
 
-    public void gestionarClases() {
-        System.out.println("Esto deberia ser como un metodo sobreescrito!");
-    }
+    public void gestionarSocios(Socio socio) {
+        System.out.println("Gestion de socios: Ingrese una opciòn");
+        System.out.println("1 - Obtener su perfil");
+        System.out.println("2 - Obtener historial de clases ");
+        System.out.println("3 - Validar membresía");
+        int opcion = Integer.parseInt(sc.nextLine());
 
-    public void gestionarSocios() {
-        System.out.println("Gestion de socios");
+        switch(opcion) {
+            case 1:
+                System.out.println(socio);
+                break;
+            case 2:
+                if (socio.getClases().isEmpty()) {
+                    System.out.println("El socio no posee clases!");
+                } else {
+                    socio.obtenerHistorialClases();
+                }
+                break;
+            case 3:
+                if (socio.getCarnet().verificarValidez()) {
+                    System.out.println("El socio tiene un carnet válido con vencimiento el " + socio.getCarnet().getFechaVencimiento());
+                } else {
+                    System.out.println("El socio tiene un carnet inválido!");
+                }
+                break;
+            default:
+                System.out.println("Opcion fuera de rango!");
+                break;
+        }
     }
 
     @Override
