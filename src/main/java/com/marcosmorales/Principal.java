@@ -1,10 +1,6 @@
-package org.marcosmorales;
+package com.marcosmorales;
 
-import org.marcosmorales.modelo.Empleado;
-import org.marcosmorales.modelo.Socio;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import com.marcosmorales.modelo.Socio;
 
 public class Principal extends Socio {
     public static void main(String[] args) {

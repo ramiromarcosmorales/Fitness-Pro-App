@@ -1,4 +1,4 @@
-package org.marcosmorales.modelo;
+package com.marcosmorales.modelo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
