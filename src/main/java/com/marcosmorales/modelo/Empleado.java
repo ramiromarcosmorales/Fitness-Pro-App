@@ -55,7 +55,7 @@ public class Empleado extends Usuario implements Registrable {
                 if (socio.getClases().isEmpty()) {
                     System.out.println("El socio no posee clases!");
                 } else {
-                    socio.obtenerHistorialClases();
+                    socio.obtenerHistorialClases(0);
                 }
                 break;
             case 3:

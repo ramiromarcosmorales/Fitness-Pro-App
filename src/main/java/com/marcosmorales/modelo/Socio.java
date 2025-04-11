@@ -63,10 +63,13 @@ public class Socio extends Usuario implements Registrable {
         this.clases.remove(num);
     }
 
-    public void obtenerHistorialClases() {
-        for (Clase clase : clases) {
-            System.out.println(clase);
-        }
+    public void obtenerHistorialClases(int index) {
+        if (index >= clases.size()) return;
+
+        Clase clase = clases.get(index);
+        System.out.println(clase);
+
+        obtenerHistorialClases(index + 1);
     }
 
     @Override
