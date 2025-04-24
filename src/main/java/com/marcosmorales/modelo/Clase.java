@@ -19,7 +19,7 @@ public class Clase {
             throw new IllegalArgumentException("La fecha ingresada es anterior a la actual!");
         }
 
-        if (horario.isBefore(LocalTime.now())) {
+        if (fecha.isEqual(LocalDate.now()) && horario.isBefore(LocalTime.now())) {
             throw new IllegalArgumentException("El horario ingresado es anterior al actual!");
         }
 
