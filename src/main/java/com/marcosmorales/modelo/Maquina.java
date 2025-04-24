@@ -3,19 +3,19 @@ package com.marcosmorales.modelo;
 import java.time.LocalDate;
 
 public class Maquina implements Registrable {
-    private String tipo;
+    private TipoMaquina tipo;
     private LocalDate fechaAlta;
     private LocalDate ultMantenimiento;
     private LocalDate proxMantenimiento;
 
-    private Maquina (String tipo, LocalDate ultMantenimiento) {
+    private Maquina (TipoMaquina tipo, LocalDate ultMantenimiento) {
         this.tipo = tipo;
         this.fechaAlta = LocalDate.now();
         this.ultMantenimiento = ultMantenimiento;
         this.proxMantenimiento = ultMantenimiento.plusMonths(6);
     }
 
-    public static Maquina crearMaquina(String tipo, LocalDate ultMantenimiento) {
+    public static Maquina crearMaquina(TipoMaquina tipo, LocalDate ultMantenimiento) {
         return new Maquina(tipo, ultMantenimiento);
     }
 
@@ -25,7 +25,7 @@ public class Maquina implements Registrable {
     }
 
     // Metodos getters
-    public String getTipo() {
+    public TipoMaquina getTipo() {
         return tipo;
     }
 
@@ -42,7 +42,7 @@ public class Maquina implements Registrable {
     }
 
     // Metodos setters
-    public void setTipo(String tipo) {
+    public void setTipo(TipoMaquina tipo) {
         this.tipo = tipo;
     }
 

@@ -33,11 +33,16 @@ public class Carnet {
 
     // Setters
     public void setFechaAlta(LocalDate fechaAlta) {
-        this.fechaAlta = fechaAlta;
+        LocalDate now = LocalDate.now();
+        if (fechaAlta.isEqual(now) || fechaAlta.isAfter(now)) {
+            this.fechaAlta = fechaAlta;
+        }
     }
 
     public void setFechaVencimiento(LocalDate fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+        if (fechaVencimiento.isAfter(LocalDate.now())) {
+            this.fechaVencimiento = fechaVencimiento;
+        }
     }
 
     @Override

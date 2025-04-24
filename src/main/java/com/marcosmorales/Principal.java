@@ -1,6 +1,9 @@
 package com.marcosmorales;
 
-import com.marcosmorales.modelo.Socio;
+import com.marcosmorales.modelo.*;
+
+import java.time.LocalDate;
+
 
 public class Principal extends Socio {
     public static void main(String[] args) {
@@ -20,15 +23,7 @@ public class Principal extends Socio {
         System.out.println(socio);
          */
 
-        /*
-        Test para la clase Empleado
-
-        Socio socio = Socio.crearSocio("Ramiro", "Marcos", "ramiro.marcos@mail.com", "1125487542");
-        Empleado empleado = Empleado.crearEmpleado("Bautista", "Garcia", "bautista.garcia@mail.com", "1132453421", "profesor");
-        System.out.println(empleado);
-        empleado.registrar();
-        socio.reservarClase(LocalDate.of(2025, 03, 26), LocalTime.of(11, 00));
-        empleado.gestionarSocios(socio);
-         */
+//        Empleado empleado = Empleado.crearEmpleado("Bautista", "Garcia", "bautista.garcia@mail.com", "1132453421", Sector.INSTRUCTOR);
+//        System.out.println(empleado);
     }
 }

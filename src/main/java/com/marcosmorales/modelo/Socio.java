@@ -39,37 +39,27 @@ public class Socio extends Usuario implements Registrable {
     }
 
     public void reservarClase(LocalDate fecha, LocalTime horario) {
-        if (carnet.verificarValidez()) {
-            LocalDateTime fechaHora = LocalDateTime.of(fecha, horario);
-            if (fechaHora.isBefore(LocalDateTime.now())) {
-                System.out.println("Error! La fecha o horario no puede ser pasada!");
-                return;
-            }
-
-            for (Clase clase : clases) {
-                if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario)) {
-                    System.out.println("Ya existe una clase reservada en esta fecha y horario!");
-                    return;
-                }
-            }
-            clases.add(Clase.crearClase(fecha, horario));
-            System.out.println("Clase reservada correctamente el " + fecha + " a las " + horario);
-        } else {
-            System.out.println("Error! Tu membresia está inactiva!");
+        if (!carnet.verificarValidez()) {
+            throw new IllegalStateException("Membresia Ináctiva!");
         }
+
+        for (Clase clase : clases) {
+            if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario)) {
+                throw new IllegalStateException("Ya existe una clase reservada en esta fecha y horario!");
+            }
+        }
+
+        clases.add(Clase.crearClase(fecha, horario));
     }
 
     public void eliminarClase(int num) {
         this.clases.remove(num);
     }
 
-    public void obtenerHistorialClases(int index) {
-        if (index >= clases.size()) return;
-
-        Clase clase = clases.get(index);
-        System.out.println(clase);
-
-        obtenerHistorialClases(index + 1);
+    public void obtenerHistorialClases() {
+        for (Clase clase : clases) {
+            System.out.println(clase);
+        }
     }
 
     @Override
