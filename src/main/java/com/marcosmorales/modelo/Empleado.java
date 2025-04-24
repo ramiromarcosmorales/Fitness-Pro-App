@@ -1,12 +1,9 @@
 package com.marcosmorales.modelo;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Empleado extends Usuario implements Registrable {
     private Sector sector;
-
-    Scanner sc = new Scanner(System.in);
 
     // Constructor sin parámetros
     public Empleado() {

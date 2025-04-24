@@ -66,7 +66,10 @@ public class Gimnasio {
             }
         }
 
-        if (socio.getClases().add(Clase.crearClase(fecha, horario))) {
+        Clase clase = Clase.crearClase(fecha, horario);
+
+        if (socio.getClases().add(clase)) {
+            clases.add(clase);
             return true;
         } else {
             return false;
