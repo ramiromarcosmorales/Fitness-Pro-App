@@ -12,10 +12,12 @@ import java.util.List;
 public class ControladorSocio {
     private Gimnasio gym;
     private Socio socio;
+    private ControladorPersistencia persistenciaControlador;
 
-    public ControladorSocio(Gimnasio gym, Socio socio) {
+    public ControladorSocio(Gimnasio gym, Socio socio, ControladorPersistencia persistenciaControlador) {
         this.gym = gym;
         this.socio = socio;
+        this.persistenciaControlador = persistenciaControlador;
         System.out.println("Controlador personal creado para el socio: " + socio.getNombre());
     }
 
@@ -27,12 +29,14 @@ public class ControladorSocio {
         System.out.println("Controlador: Pidiendo al modelo que reserva la clase para: " + socio.getNombre());
 
         try {
-            return gym.reservarClase(this.socio, fecha, horario);
+            boolean result = gym.reservarClase(this.socio, fecha, horario);
+            if (result) persistenciaControlador.guardarData(this.gym);
+            return result;
         } catch (ExcepcionReserva e) {
-            System.out.println("Error al reservar: " + e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
-            System.out.println("Error (datos invalidos): " + e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -42,6 +46,8 @@ public class ControladorSocio {
     }
 
     public boolean eliminarClase(int num) {
-        return this.socio.eliminarClase(num);
+        boolean result = this.socio.eliminarClase(num);
+        if (result) persistenciaControlador.guardarData(this.gym);
+        return result;
     }
 }
