@@ -2,7 +2,7 @@ package com.marcosmorales.modelo;
 
 import java.time.LocalDate;
 
-public class Empleado extends Usuario implements Registrable {
+public class Empleado extends Usuario implements IRegistrable {
     private Sector sector;
 
     // Constructor sin parámetros

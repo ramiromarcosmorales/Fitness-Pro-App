@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Socio extends Usuario implements Registrable {
+public class Socio extends Usuario implements IRegistrable {
     private Carnet carnet;
     private LinkedList<Clase> clases;
 
@@ -33,23 +33,29 @@ public class Socio extends Usuario implements Registrable {
     }
 
     // Metodo para crear Socio
-    protected static Socio crearSocio(String nombre, String apellido, String email, String telefono) {
+    public static Socio crearSocio(String nombre, String apellido, String email, String telefono) {
         return new Socio(nombre, apellido, email, telefono);
     }
 
-    public void reservarClase(LocalDate fecha, LocalTime horario) {
-        if (!carnet.verificarValidez()) throw new IllegalStateException("Membresia Ináctiva!");
+    public boolean agregarClase(Clase clase) {
+        if (!carnet.verificarValidez())
+            throw new IllegalArgumentException("Error: Membresia inactiva!");
 
-        for (Clase clase : clases) {
-            if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario)) throw new IllegalStateException("Ya existe una clase reservada en esta fecha y horario!");
-
+        for (Clase c : clases) {
+            if (c.getFecha().equals(clase.getFecha()) && c.getHorario().equals(clase.getHorario()))
+                return false;
         }
 
-        clases.add(Clase.crearClase(fecha, horario));
+        return this.clases.add(clase);
     }
 
-    public void eliminarClase(int num) {
-        this.clases.remove(num);
+
+    public boolean eliminarClase(int num) {
+        if (num >= 0 && num < this.clases.size()) {
+            this.clases.remove(num);
+            return true;
+        }
+        return false;
     }
 
     public void obtenerHistorialClases() {

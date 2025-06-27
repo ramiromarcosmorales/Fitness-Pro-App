@@ -2,7 +2,7 @@ package com.marcosmorales.modelo;
 
 import java.time.LocalDate;
 
-public class Maquina implements Registrable {
+public class Maquina implements IRegistrable {
     private TipoMaquina tipo;
     private LocalDate fechaAlta;
     private LocalDate ultMantenimiento;

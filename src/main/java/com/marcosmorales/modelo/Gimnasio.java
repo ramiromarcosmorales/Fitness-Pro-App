@@ -50,22 +50,34 @@ public class Gimnasio {
     }
 
     public boolean reservarClase(Socio socio, LocalDate fecha, LocalTime horario) {
-        if (socio == null || fecha == null || horario == null) throw new IllegalArgumentException("Uno de los datos recibidos es nulo!");
+        if (socio == null || fecha == null || horario == null)
+            throw new IllegalArgumentException("Uno de los datos recibidos es nulo!");
 
-
-        if (!socio.getCarnet().verificarValidez()) throw new IllegalStateException("El carnet del socio no está activo!");
-
+        if (!socio.getCarnet().verificarValidez())
+            throw new IllegalStateException("El carnet del socio no está activo!");
 
         for (Clase clase : clases) {
-            if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario)) throw new IllegalStateException("Ya existe una clase reservada en esta fecha y horario!");
+            if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario))
+                throw new IllegalStateException("Ya existe una clase reservada en esta fecha y horario!");
         }
 
         Clase clase = Clase.crearClase(fecha, horario);
 
-        if (socio.getClases().add(clase)) {
-            return clases.add(clase);
-        } else {
-            return false;
+        boolean socioPudoAnadirla = socio.agregarClase(clase);
+
+        if (socioPudoAnadirla) {
+            this.clases.add(clase);
+            return true;
         }
+
+        return false;
+    }
+
+    public List<Empleado> getEmpleados() {
+        return this.empleados;
+    }
+
+    public List<Socio> getSocios() {
+        return this.socios;
     }
 }

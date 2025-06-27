@@ -1,5 +1,5 @@
 package com.marcosmorales.modelo;
 
-public interface Registrable {
+public interface IRegistrable {
     void registrar();
 }
