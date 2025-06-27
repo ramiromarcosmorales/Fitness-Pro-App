@@ -1,5 +1,6 @@
 package com.marcosmorales.controlador;
 
+import com.marcosmorales.excepciones.ExcepcionDuplicado;
 import com.marcosmorales.modelo.*;
 
 import java.time.LocalDate;
@@ -13,18 +14,42 @@ public class ControladorGimnasio {
     }
 
     public boolean contratarEmpleado(String nombre, String apellido, String email, String telefono, Sector sector) {
+        try {
         Empleado empleado = Empleado.crearEmpleado(nombre, apellido, email, telefono, sector);
         return gym.contratarEmpleado(empleado);
+        } catch (ExcepcionDuplicado e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean registrarSocio(String nombre, String apellido, String email, String telefono) {
-        Socio socio = Socio.crearSocio(nombre, apellido, email, telefono);
-        return gym.registrarSocio(socio);
+        try {
+            Socio socio = Socio.crearSocio(nombre, apellido, email, telefono);
+            return gym.registrarSocio(socio);
+        } catch (ExcepcionDuplicado e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean registrarMaquina(TipoMaquina tipo, LocalDate ultMantenimiento) {
-        Maquina nuevaMaquina = Maquina.crearMaquina(tipo, ultMantenimiento);
-        return gym.registrarMaquina(nuevaMaquina);
+        try {
+            Maquina nuevaMaquina = Maquina.crearMaquina(tipo, ultMantenimiento);
+            return gym.registrarMaquina(nuevaMaquina);
+        } catch (ExcepcionDuplicado e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
     }
 
     public Maquina proximaMaquinaParaMantenimiento() {

@@ -1,5 +1,8 @@
 package com.marcosmorales.modelo;
 
+import com.marcosmorales.excepciones.ExcepcionDuplicado;
+import com.marcosmorales.excepciones.ExcepcionReserva;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -19,28 +22,31 @@ public class Gimnasio {
         );
     }
 
-    public boolean contratarEmpleado(Empleado empleado) {
+    public boolean contratarEmpleado(Empleado empleado) throws ExcepcionDuplicado {
         if (empleado == null) throw new IllegalArgumentException("El empleado no puede ser nulo!");
 
 
-        if (empleados.contains(empleado)) return false;
+        if (empleados.contains(empleado))
+            throw new ExcepcionDuplicado("Error Gimnasio: El empleado ya esta registrado.");
 
         return empleados.add(empleado);
     }
 
-    public boolean registrarSocio(Socio socio) {
+    public boolean registrarSocio(Socio socio) throws ExcepcionDuplicado {
         if (socio == null) throw new IllegalArgumentException("El socio no puede ser nulo!");
 
 
-        if (socios.contains(socio)) return false;
+        if (socios.contains(socio))
+            throw new ExcepcionDuplicado("Error Gimnasio: El socio ya está registrado.");
 
         return socios.add(socio);
     }
 
-    public boolean registrarMaquina(Maquina maquina) {
+    public boolean registrarMaquina(Maquina maquina) throws ExcepcionDuplicado {
         if (maquina == null) throw new IllegalArgumentException("La maquina no puede ser nulo!");
 
-        if (maquinasPriority.contains(maquina)) return false;
+        if (maquinasPriority.contains(maquina))
+            throw new ExcepcionDuplicado("Error Gimnasio: La maquina ya esta registrada.");
 
         return maquinasPriority.add(maquina);
     }
@@ -49,16 +55,16 @@ public class Gimnasio {
         return maquinasPriority.peek();
     }
 
-    public boolean reservarClase(Socio socio, LocalDate fecha, LocalTime horario) {
+    public boolean reservarClase(Socio socio, LocalDate fecha, LocalTime horario) throws ExcepcionReserva {
         if (socio == null || fecha == null || horario == null)
             throw new IllegalArgumentException("Uno de los datos recibidos es nulo!");
 
         if (!socio.getCarnet().verificarValidez())
-            throw new IllegalStateException("El carnet del socio no está activo!");
+            throw new ExcepcionReserva("Error Socio: La membresia no esta activa.");
 
         for (Clase clase : clases) {
             if (clase.getFecha().equals(fecha) && clase.getHorario().equals(horario))
-                throw new IllegalStateException("Ya existe una clase reservada en esta fecha y horario!");
+                throw new ExcepcionReserva("Error Socio: Ya existe una clase reservada en esta fecha y horario.");
         }
 
         Clase clase = Clase.crearClase(fecha, horario);
@@ -69,8 +75,7 @@ public class Gimnasio {
             this.clases.add(clase);
             return true;
         }
-
-        return false;
+        throw new ExcepcionReserva("Error Socio: Ya existe una clase!");
     }
 
     public List<Empleado> getEmpleados() {

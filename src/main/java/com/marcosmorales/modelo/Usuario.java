@@ -1,5 +1,6 @@
 package com.marcosmorales.modelo;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Usuario {
